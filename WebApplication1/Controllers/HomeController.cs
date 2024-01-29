@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
-using WebApplication1.Models;
+using BerserkCollection.Models;
 
-namespace WebApplication1.Controllers
+namespace BerserkCollection.Controllers
 {
     public class HomeController : Controller
     {
+        CardContext db = new CardContext();
+
         public IActionResult Index()
         {
+            var cards = db.Cards.ToList();
+
             return View(GetCards());
         }
 
