@@ -14,7 +14,7 @@ namespace BerserkCollection.Models
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Berserkcollection;TrustServerCertificate=true;");
+        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Berserkcollection;TrustServerCertificate=true;User=test;Password=123456");
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
