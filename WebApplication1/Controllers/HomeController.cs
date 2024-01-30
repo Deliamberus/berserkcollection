@@ -6,11 +6,12 @@ namespace BerserkCollection.Controllers
 {
     public class HomeController : Controller
     {
-        CardContext db = new CardContext();
-
         public IActionResult Index()
         {
-            var cards = db.Cards.ToList();
+            using (BerserkcollectionContext db = new BerserkcollectionContext())
+            {
+                var cards = db.Cards.ToList();
+            }
 
             return View(GetCards());
         }
