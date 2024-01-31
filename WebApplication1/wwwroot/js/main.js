@@ -1,7 +1,7 @@
 $(function () {
     $(".minus").click(function () {
         let countlabel = $(this).siblings('label.count');
-        let countinput = $(this).siblings('input.count');
+        let idinput = $(this).siblings('input.idcard');
         let img = $(this).siblings('img');
         let newValue = parseInt(countlabel.text()) - 1;
 
@@ -11,18 +11,18 @@ $(function () {
         }
 
         countlabel.text(newValue);
-        countinput.val(newValue);
+        saveCard(idinput.val(), newValue);
     });
 
     $(".plus").click(function () {
         let countlabel = $(this).siblings('label.count');
-        let countinput = $(this).siblings('input.count');
+        let idinput = $(this).siblings('input.idcard');
         let img = $(this).siblings('img');
         let newValue = parseInt(countlabel.text()) + 1;
 
         img.removeClass("gray");
         countlabel.text(newValue);
-        countinput.val(newValue);
+        saveCard(idinput.val(), newValue);
     });
 
     $(".filter").click(function () {
@@ -70,4 +70,24 @@ $(function () {
             $("#cardList").addClass("container-xxl");
         }
     });
+
+    function saveCard(id, count) {
+        const dataToSend = {
+            Id: id,
+            Count: Number(count)
+        };
+
+        $.ajax({
+            url: '/Home/SaveCard',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(dataToSend),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    };
 })

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using OfficeOpenXml;
 using BerserkCollection.Models;
 
 namespace BerserkCollection.Controllers
@@ -12,45 +11,27 @@ namespace BerserkCollection.Controllers
         }
 
         [HttpPost]
-        public void Index(List<Card> cards)
+        public IActionResult SaveCard([FromBody] Card card)
         {
-            SaveCards(cards);
+            using (BerserkcollectionContext db = new BerserkcollectionContext())
+            {
+                var dbcard = db.Cards.Where(x => x.Id == card.Id).FirstOrDefault();
+                dbcard.Count = card.Count;
+
+                db.SaveChanges();
+
+                return Ok("ok");
+            }
         }
 
-        public List<Card> GetCards()
+        private List<Card> GetCards()
         {
             using (BerserkcollectionContext db = new BerserkcollectionContext())
             {
                 var cards = db.Cards.ToList();
 
                 return cards;
-            }            
-        }
-
-        public List<Card> SaveCards(List<Card> inputCards)
-        {
-            string path = "./wwwroot/data/data.xlsx";
-
-            FileInfo fileInfo = new FileInfo(path);
-            using (ExcelPackage package = new ExcelPackage(fileInfo))
-            {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
-
-                foreach (var card in inputCards)
-                {
-                    foreach (var cell in worksheet.Cells["B:C"])
-                    {
-                        if (cell.Value.ToString() == card.Name)
-                        {
-                            worksheet.Cells[cell.Start.Row, 3].Value = card.Count;
-                            break;
-                        }
-                    }
-                }
-
-                package.Save();
             }
-            return inputCards;
         }
     }
 }
