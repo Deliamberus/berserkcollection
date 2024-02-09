@@ -1,25 +1,10 @@
-﻿@model List<BerserkCollection.Models.Card>
-<main id="cardList" class="text-white container-xxl align-items-center text-center">
-    <div class="row">
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <div class="col @(Model[i].Currency) @(Model[i].Rare) @(Model[i].Element) @(Model[i].Set)" style="height:290px">
-                @if (Model[i].Count > 0)
-                {
-                    <img class="card-img" src="@Model[i].Image">
-                }
-                else
-                {
-                    <img class="card-img gray" src="@Model[i].Image">
-                }
-                <br />
-                <b><label>@Model[i].Number. @Model[i].Name</label></b><br />
-                <input type="hidden" name="cards[@i].Name" value="@Model[i].Name">
-                <label class="minus">-</label>
-                <label class="count">@Model[i].Count</label>
-                <input class="idcard" type="hidden" name="cards[@i].Id" value="@Model[i].Id">
-                <label class="plus">+</label>
-            </div>
-        }
-    </div>
+﻿<main class="text-white container-xxl align-items-center text-center">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <label>Логин</label>
+        <input name="UserName">
+        <label>Пароль</label>
+        <input type="password" name="Password">
+        <input type="submit">
+        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    </form>
 </main>

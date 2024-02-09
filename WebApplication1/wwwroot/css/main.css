@@ -77,35 +77,3 @@ img.gray {
     height: 30px;
     width: 30px;
 }
-
-/*.card {
-    box-shadow: 1px 1px 8px rgba(0,0,0,0.35);
-    border-radius: 0;
-    margin-bottom: 2rem;
-}
-
-.card-body {
-    padding: 0.8rem;
-}
-
-    .card-body.article-tag {
-        font-size: 75%;
-        color: #fff;
-        background-color: rgb(51, 51, 51);
-        padding-top: 0;
-        padding-bottom: 0.2rem;
-        text-align: center;
-    }
-
-    .card-body.article-author {
-        font-size: 75%;
-        border-top: 1px solid #cbcbcb;
-        padding-bottom: 0.3rem;
-        padding-top: 0.3rem;
-    }
-
-.custom-popover {
-    --bs-popover-max-width: 320px;
-    --bs-popover-body-padding-x: 3px;
-    --bs-popover-body-padding-y: 3px;
-}*/

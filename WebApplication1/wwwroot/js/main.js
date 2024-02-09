@@ -78,7 +78,7 @@ $(function () {
         };
 
         $.ajax({
-            url: '/Home/SaveCard',
+            url: '/Collection/SaveCard',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(dataToSend),

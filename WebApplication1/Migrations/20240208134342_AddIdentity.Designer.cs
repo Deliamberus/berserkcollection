@@ -4,6 +4,7 @@ using BerserkCollection.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BerserkCollection.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class BerserkcollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20240208134342_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +34,9 @@ namespace BerserkCollection.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Armor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Count")
                         .HasColumnType("int");
 
                     b.Property<string>("Currency")
@@ -101,7 +107,7 @@ namespace BerserkCollection.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("BerserkCollection.Domain.Entities.UserAccount", b =>
+            modelBuilder.Entity("BerserkCollection.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -110,6 +116,7 @@ namespace BerserkCollection.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -276,10 +283,12 @@ namespace BerserkCollection.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -316,10 +325,12 @@ namespace BerserkCollection.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -337,7 +348,7 @@ namespace BerserkCollection.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BerserkCollection.Domain.Entities.UserAccount", "User")
+                    b.HasOne("BerserkCollection.Domain.Entities.User", "User")
                         .WithMany("Cards")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -359,7 +370,7 @@ namespace BerserkCollection.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BerserkCollection.Domain.Entities.UserAccount", null)
+                    b.HasOne("BerserkCollection.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -368,7 +379,7 @@ namespace BerserkCollection.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BerserkCollection.Domain.Entities.UserAccount", null)
+                    b.HasOne("BerserkCollection.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,7 +394,7 @@ namespace BerserkCollection.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BerserkCollection.Domain.Entities.UserAccount", null)
+                    b.HasOne("BerserkCollection.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,14 +403,14 @@ namespace BerserkCollection.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("BerserkCollection.Domain.Entities.UserAccount", null)
+                    b.HasOne("BerserkCollection.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BerserkCollection.Domain.Entities.UserAccount", b =>
+            modelBuilder.Entity("BerserkCollection.Domain.Entities.User", b =>
                 {
                     b.Navigation("Cards");
                 });

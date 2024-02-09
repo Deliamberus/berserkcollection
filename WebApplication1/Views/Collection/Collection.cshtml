@@ -1,0 +1,48 @@
+﻿@using BerserkCollection.Models
+@model List<CollectionViewModel>
+
+<div class="container-xxl d-flex mt-2 mb-2">
+    <img id="plains" type="element" class="filter icon-img mx-1" src="/images/icons/element-plains.png">
+    <img id="mountains" type="element" class="filter icon-img mx-1" src="/images/icons/element-mountains.png">
+    <img id="forests" type="element" class="filter icon-img mx-1" src="/images/icons/element-forests.png">
+    <img id="swamps" type="element" class="filter icon-img mx-1" src="/images/icons/element-swamps.png">
+    <img id="dark" type="element" class="filter icon-img mx-1" src="/images/icons/element-dark.png">
+    <img id="neutral" type="element" class="filter icon-img mx-1" src="/images/icons/element-neutral.png">
+    <img id="common" type="rare" class="filter icon-img mx-1" src="/images/icons/common.png">
+    <img id="uncommon" type="rare" class="filter icon-img mx-1" src="/images/icons/uncommon.png">
+    <img id="rare" type="rare" class="filter icon-img mx-1" src="/images/icons/rare.png">
+    <img id="ultrarare" type="rare" class="filter icon-img mx-1" src="/images/icons/ultrarare.png">
+    <img id="ordinary" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-ordinary.png">
+    <img id="elite" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-elite.png">
+    <img id="legendsSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-ll.png">
+    <img id="warSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-1.png">
+    <img id="darkSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-2.png">
+    <img id="check" type="availability" class="icon-img mx-1 gray" src="/images/icons/check.png">
+    <img id="cross" type="availability" class="icon-img mx-1" src="/images/icons/cross.png">
+    <img id="small" type="screen" class="icon-img mx-1" src="/images/icons/smallscreen.png">
+    <img id="full" type="screen" class="icon-img mx-1 gray" src="/images/icons/fullscreen.png">
+</div>
+<main id="cardList" class="text-white container-xxl align-items-center text-center">
+    <div class="row">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col @(Model[i].Currency) @(Model[i].Rare) @(Model[i].Element) @(Model[i].Set)" style="height:290px">
+                @if (Model[i].Count > 0)
+                {
+                    <img class="card-img" src="@Model[i].Image">
+                }
+                else
+                {
+                    <img class="card-img gray" src="@Model[i].Image">
+                }
+                <br />
+                <b><label>@Model[i].Number. @Model[i].Name</label></b><br />
+                <input type="hidden" name="cards[@i].Name" value="@Model[i].Name">
+                <label class="minus">-</label>
+                <label class="count">@Model[i].Count</label>
+                <input class="idcard" type="hidden" name="cards[@i].Id" value="@Model[i].Id">
+                <label class="plus">+</label>
+            </div>
+        }
+    </div>
+</main>
