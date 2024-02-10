@@ -1,10 +1,24 @@
 ﻿<main class="text-white container-xxl align-items-center text-center">
-    <form asp-controller="Account" asp-action="Login" method="post">
-        <label>Логин</label>
-        <input name="UserName">
-        <label>Пароль</label>
-        <input type="password" name="Password">
-        <input type="submit">
-        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    <form asp-controller="Account" asp-action="Login" method="post" class="login-container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input name="UserName" type="text" class="form-control" placeholder="Логин">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input name="Password" type="password" placeholder="Пароль" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input type="submit" value="Войти" class="btn btn-block btn-login">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span>Нет аккаунта? </span><a asp-controller="Account" asp-action="Register">Зарегистрируйся</a>
+            </div>
+        </div>
     </form>
 </main>

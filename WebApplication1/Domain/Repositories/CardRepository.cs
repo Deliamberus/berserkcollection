@@ -1,4 +1,5 @@
 ﻿using BerserkCollection.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BerserkCollection.Domain.Repositories
 {
@@ -15,6 +16,12 @@ namespace BerserkCollection.Domain.Repositories
         {
             var cards = _context.Cards.ToList();
             return cards;
+        }
+
+        public Card? GetCardById(int id)
+        {
+            var card = _context.Cards.FirstOrDefault(x => x.Id == id);
+            return card;
         }
     }
 }

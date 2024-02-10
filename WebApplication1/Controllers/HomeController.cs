@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using BerserkCollection.Domain.Entities;
-using BerserkCollection.Domain;
-using BerserkCollection.Domain.Repositories;
 
 namespace BerserkCollection.Controllers
 {
@@ -9,6 +6,10 @@ namespace BerserkCollection.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Collection", "Collection");
+            }
             return View();
         }
     }

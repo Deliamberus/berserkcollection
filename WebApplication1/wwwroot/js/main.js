@@ -73,7 +73,7 @@ $(function () {
 
     function saveCard(id, count) {
         const dataToSend = {
-            Id: id,
+            Id: Number(id),
             Count: Number(count)
         };
 

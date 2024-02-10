@@ -12,7 +12,9 @@ namespace BerserkCollection.Models
         public string? Currency { get; set; }
         public string? Rare { get; set; }
         public string? Set { get; set; }
-        public int? Count { get; set; }
+        public int Count { get; set; }
+
+        public CollectionViewModel() { }
 
         public CollectionViewModel(Card card)
         {

@@ -3,6 +3,7 @@ using BerserkCollection.Domain.Repositories;
 using BerserkCollection.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Security.Claims;
 
 namespace BerserkCollection.Controllers
@@ -18,13 +19,12 @@ namespace BerserkCollection.Controllers
             _collectionRepository = collectionRepository;
         }
 
-        [Authorize]
         public IActionResult Collection()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return View("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             var allCards = _cardRepository.GetAllCards();
@@ -34,10 +34,16 @@ namespace BerserkCollection.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveCard([FromBody] Card card)
+        [Authorize]
+        public IActionResult SaveCard([FromBody] SaveCardViewModel card)
         {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
-            _collectionRepository.SaveCard(card);
+            _collectionRepository.SaveCard(userId, card);
             return Ok("ok");
         }
 

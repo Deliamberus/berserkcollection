@@ -1,7 +1,7 @@
 ﻿@using BerserkCollection.Models
 @model List<CollectionViewModel>
 
-<div class="container-xxl d-flex mt-2 mb-2">
+<div class="container-xxl d-flex mt-2 mb-2 justify-content-center">
     <img id="plains" type="element" class="filter icon-img mx-1" src="/images/icons/element-plains.png">
     <img id="mountains" type="element" class="filter icon-img mx-1" src="/images/icons/element-mountains.png">
     <img id="forests" type="element" class="filter icon-img mx-1" src="/images/icons/element-forests.png">
@@ -26,7 +26,7 @@
     <div class="row">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col @(Model[i].Currency) @(Model[i].Rare) @(Model[i].Element) @(Model[i].Set)" style="height:290px">
+            <div class="col @(Model[i].Currency) @(Model[i].Rare) @(Model[i].Element) @(Model[i].Set)" style="height:300px">
                 @if (Model[i].Count > 0)
                 {
                     <img class="card-img" src="@Model[i].Image">

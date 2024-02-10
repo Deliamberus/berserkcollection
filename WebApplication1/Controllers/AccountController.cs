@@ -32,15 +32,14 @@ namespace BerserkCollection.Controllers
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
                 }
             }
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        [HttpGet]
+        public IActionResult Logout()
         {
             // удаляем аутентификационные куки
-            await _signInManager.SignOutAsync();
+            _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
@@ -60,8 +59,9 @@ namespace BerserkCollection.Controllers
 
                 if (result.Succeeded)
                 {
-                    _signInManager.SignInAsync(user, isPersistent: true);
-                    return RedirectToAction("Index", "Home");
+                    _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
+                    //_signInManager.SignInAsync(user, isPersistent: true);
+                    return RedirectToAction("Collection", "Collection");
                 }
 
                 foreach (var error in result.Errors)
