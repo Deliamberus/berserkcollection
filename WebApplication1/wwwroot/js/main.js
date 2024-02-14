@@ -42,14 +42,14 @@ $(function () {
         let filterName = $(this).attr('id');
         let filterType = $(this).attr('type');
 
-        if (filterName == "check") {
+        if (filterName == "have") {
             $(this).removeClass("gray");
-            $("#cross").addClass("gray");
+            $("#all").addClass("gray");
             $(".card-img.gray").parent().addClass("displayNone" + filterType);
         }
         else {
             $(this).removeClass("gray");
-            $("#check").addClass("gray");
+            $("#have").addClass("gray");
             $(".card-img").parent().removeClass("displayNone" + filterType);
         }
     });

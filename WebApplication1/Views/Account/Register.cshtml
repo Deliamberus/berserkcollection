@@ -1,13 +1,35 @@
-﻿<main class="text-white container-xxl align-items-center text-center">
-    <form asp-controller="Account" asp-action="Register" method="post">
-        <label>Логин</label>
-        <input name="UserName">
-        <label>Email</label>
-        <input type="email" name="Email">
-        <label>City</label>
-        <input name="City">
-        <label>Пароль</label>
-        <input type="password" name="Password"></input>
-        <input type="submit">Регистрация</input>
+﻿@using BerserkCollection.Models
+@model RegisterViewModel
+
+<main class="text-white container-xxl align-items-center text-center">
+    <form asp-controller="Account" asp-action="Register" method="post" class="login-container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "required", @placeholder = "Логин" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @required = "required", @placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "Город" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input name="Password" type="password" placeholder="Пароль" class="form-control" required>
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <input type="submit" value="Регистрация" class="btn btn-block btn-login">
+            </div>
+        </div>
     </form>
 </main>

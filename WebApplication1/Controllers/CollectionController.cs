@@ -24,7 +24,7 @@ namespace BerserkCollection.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             var allCards = _cardRepository.GetAllCards();
@@ -40,7 +40,7 @@ namespace BerserkCollection.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             _collectionRepository.SaveCard(userId, card);

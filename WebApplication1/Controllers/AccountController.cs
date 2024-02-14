@@ -16,6 +16,15 @@ namespace BerserkCollection.Controllers
             _signInManager = signInManager;
         }
 
+        public IActionResult Login()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Collection", "Collection");
+            }
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -29,10 +38,11 @@ namespace BerserkCollection.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    ModelState.AddModelError("UserName", "Неправильный логин и (или) пароль");
+                    return View(model);
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         [HttpGet]
@@ -40,7 +50,7 @@ namespace BerserkCollection.Controllers
         {
             // удаляем аутентификационные куки
             _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -50,17 +60,33 @@ namespace BerserkCollection.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new UserAccount { UserName = model.UserName, Email = model.Email, City = model.City };
+
+                // Проверка на дубликат логина
+                var userWithSameUserName = await _userManager.FindByNameAsync(model.UserName);
+                if (userWithSameUserName != null)
+                {
+                    ModelState.AddModelError("UserName", "Пользователь с таким логином существует");
+                    return View(model);
+                }
+
+                // Проверка на дубликат почты
+                var userWithSameEmail = await _userManager.FindByEmailAsync(model.Email);
+                if (userWithSameEmail != null)
+                {
+                    ModelState.AddModelError("Email", "Пользователь с такой почтой существует");
+                    return View(model);
+                }
+
                 var result = _userManager.CreateAsync(user, model.Password).Result;
 
                 if (result.Succeeded)
                 {
-                    _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
-                    //_signInManager.SignInAsync(user, isPersistent: true);
+                    await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
                     return RedirectToAction("Collection", "Collection");
                 }
 
@@ -70,7 +96,7 @@ namespace BerserkCollection.Controllers
                 }
             }
 
-            return View();
+            return View(model);
         }
     }
 }
