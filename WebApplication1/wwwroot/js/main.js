@@ -12,6 +12,7 @@ $(function () {
 
         countlabel.text(newValue);
         saveCard(idinput.val(), newValue);
+        checkVisible(this, newValue);
     });
 
     $(".plus").click(function () {
@@ -23,6 +24,7 @@ $(function () {
         img.removeClass("gray");
         countlabel.text(newValue);
         saveCard(idinput.val(), newValue);
+        checkVisible(this, newValue);
     });
 
     $(".filter").click(function () {
@@ -40,17 +42,27 @@ $(function () {
 
     $("[type='availability']").click(function () {
         let filterName = $(this).attr('id');
-        let filterType = $(this).attr('type');
 
+        $("[type='availability']").addClass("gray");
+        $(this).removeClass("gray");
         if (filterName == "have") {
-            $(this).removeClass("gray");
-            $("#all").addClass("gray");
-            $(".card-img.gray").parent().addClass("displayNone" + filterType);
+            $(".more").removeClass("displayNoneavailability");
+            $(".set").removeClass("displayNoneavailability");
+            $(".less").removeClass("displayNoneavailability");
+            $(".card-img.gray").parent().addClass("displayNoneavailability");
         }
-        else {
-            $(this).removeClass("gray");
-            $("#have").addClass("gray");
-            $(".card-img").parent().removeClass("displayNone" + filterType);
+        else if (filterName == "all") {
+            $(".card-img").parent().removeClass("displayNoneavailability");
+        }
+        else if (filterName == "less") {
+            $(".less").removeClass("displayNoneavailability");
+            $(".more").addClass("displayNoneavailability");
+            $(".set").addClass("displayNoneavailability");
+        }
+        else if (filterName == "more") {
+            $(".more").removeClass("displayNoneavailability");
+            $(".less").addClass("displayNoneavailability");
+            $(".set").addClass("displayNoneavailability");
         }
     });
 
@@ -90,4 +102,34 @@ $(function () {
             }
         });
     };
+
+    function checkVisible(element, count) {
+        let card = $(element).parent()
+        let isHorde = card.hasClass("ishorde");
+
+        if (count < 3 || (count < 5 && isHorde)) {
+            card.removeClass("set");
+            card.removeClass("more");
+            card.addClass("less");
+            if (!$("#more").hasClass("gray") || (!$("#have").hasClass("gray") && count == 0)) {
+                card.addClass("displayNoneavailability");
+            } 
+        }
+        else if ((count > 3 && !isHorde) || (count > 5 && isHorde)) {
+            card.removeClass("set");
+            card.removeClass("less");
+            card.addClass("more");
+            if (!$("#less").hasClass("gray")) {
+                card.addClass("displayNoneavailability");
+            }
+        }
+        else {
+            card.removeClass("more");
+            card.removeClass("less");
+            card.addClass("set");
+            if (!$("#less").hasClass("gray") || !$("#more").hasClass("gray")) {
+                card.addClass("displayNoneavailability");
+            }
+        }
+    }
 })

@@ -18,6 +18,8 @@
     <img id="warSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-1.png" title="Война стихий">
     <img id="darkSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-2.png" title="Нашествие тьмы">
     <img id="seedSet" type="set" class="filter icon-img mx-1" src="/images/icons/rarity-common-3.png" title="Семена раздора">
+    <img id="less" type="availability" class="icon-img mx-1 gray" src="/images/icons/less.png" title="Некомплект">
+    <img id="more" type="availability" class="icon-img mx-1 gray" src="/images/icons/more.png" title="Лишние">
     <img id="have" type="availability" class="icon-img mx-1 gray" src="/images/icons/plus.png" title="В коллекции">
     <img id="all" type="availability" class="icon-img mx-1" src="/images/icons/tilde.png" title="Все карты">
     <img id="small" type="screen" class="icon-img mx-1" src="/images/icons/smallscreen.png" title="По 6 в ряд">
@@ -27,7 +29,12 @@
     <div class="row">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col @(Model[i].Currency) @(Model[i].Rare) @(Model[i].Element) @(Model[i].Set)" style="height:300px">
+            <div class="col @(Model[i].Currency) 
+                            @(Model[i].Rare) 
+                            @(Model[i].Element) 
+                            @(Model[i].Set)
+                            @(Model[i].Properties)
+                            @(CollectionViewModel.GetAvailability(Model[i].Count, Model[i].IsHorde))" style="height:300px">
                 @if (Model[i].Count > 0)
                 {
                     <img class="card-img" src="@Model[i].Image">
