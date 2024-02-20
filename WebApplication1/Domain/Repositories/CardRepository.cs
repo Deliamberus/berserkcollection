@@ -14,7 +14,7 @@ namespace BerserkCollection.Domain.Repositories
 
         public List<Card> GetAllCards()
         {
-            var cards = _context.Cards.ToList();
+            var cards = _context.Cards.OrderBy(x => x.Set).ThenBy(x => x.Number).ToList();
             return cards;
         }
 
