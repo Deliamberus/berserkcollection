@@ -106,7 +106,7 @@ img {
     width: 496px;
     height: 700px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -114,5 +114,5 @@ img {
     width: 496px;
     height: 700px;
     object-fit: contain;
-    border-radius: 30px;
+    border-radius: 40px;
 }
