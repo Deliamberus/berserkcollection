@@ -83,6 +83,16 @@ $(function () {
         }
     });
 
+    $('.card-img').click(function () {
+        $("#myModal").css("display", "flex");
+        $("#modalImg").attr("src", $(this).attr("src"));
+    });
+
+    // Закрываем модальное окно если клик был не по изображению внутри модального окна
+    $("#myModal").click(function (event) {
+        $("#myModal").css("display", "none");
+    });
+
     function saveCard(id, count) {
         const dataToSend = {
             Id: Number(id),
@@ -113,7 +123,7 @@ $(function () {
             card.addClass("less");
             if (!$("#more").hasClass("gray") || (!$("#have").hasClass("gray") && count == 0)) {
                 card.addClass("displayNoneavailability");
-            } 
+            }
         }
         else if ((count > 3 && !isHorde) || (count > 5 && isHorde)) {
             card.removeClass("set");
