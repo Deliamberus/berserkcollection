@@ -98,5 +98,11 @@ namespace BerserkCollection.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
     }
 }
