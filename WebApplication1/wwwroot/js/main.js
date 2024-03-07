@@ -59,6 +59,12 @@ $(function () {
             $(".more").addClass("displayNoneavailability");
             $(".set").addClass("displayNoneavailability");
         }
+        else if (filterName == "not") {
+            $(".less").addClass("displayNoneavailability");
+            $(".more").addClass("displayNoneavailability");
+            $(".set").addClass("displayNoneavailability");
+            $(".card-img.gray").parent().removeClass("displayNoneavailability");
+        }
         else if (filterName == "more") {
             $(".more").removeClass("displayNoneavailability");
             $(".less").addClass("displayNoneavailability");
