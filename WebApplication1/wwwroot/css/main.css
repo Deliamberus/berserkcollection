@@ -58,14 +58,15 @@ img.gray {
 #not,
 #small,
 #\30legendsSet {
-    margin-left: 50px !important;
+    margin-left: 30px !important;
 }
 
 .displayNonerare,
 .displayNonecurrency,
 .displayNoneelement,
 .displayNoneavailability,
-.displayNoneset {
+.displayNoneset,
+.displayNonename{
     display: none;
 }
 
@@ -116,3 +117,24 @@ img {
     object-fit: contain;
     border-radius: 40px;
 }
+
+.filter-col-start {
+    padding-left: 70px !important;
+}
+
+.filter-col-end {
+    padding-right: 70px !important;
+}
+
+#filterCardName {
+    border-radius: 50px;
+    background: unset;
+    width: 230px;
+    height: 30px;
+    color: lightgray;
+    font-size:revert-layer;
+}
+
+    #filterCardName::placeholder {
+        color: lightgray;
+    }

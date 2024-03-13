@@ -99,6 +99,19 @@ $(function () {
         $("#myModal").css("display", "none");
     });
 
+    $("#filterCardName").on("input", function () {
+        let searchText = $(this).val();
+        if (searchText.length > 2) {
+            $(".card-img").parent().removeClass("displayNonename");
+            $(".lblCardName").filter(function () {
+                return $(this).text().toLowerCase().indexOf(searchText) === -1;
+            }).parent().parent().addClass("displayNonename");
+        }
+        else {
+            $(".card-img").parent().removeClass("displayNonename");
+        }
+    });
+
     function saveCard(id, count) {
         const dataToSend = {
             Id: Number(id),

@@ -1,38 +1,45 @@
 ﻿@using BerserkCollection.Models
 @model List<CollectionViewModel>
 
-<div class="container-xxl d-flex mt-2 mb-2 justify-content-center">
-    <img id="plains" type="element" class="filter icon-img mx-1" src="/images/icons/stepi.png" title="Степи">
-    <img id="mountains" type="element" class="filter icon-img mx-1" src="/images/icons/gory.png" title="Горы">
-    <img id="forests" type="element" class="filter icon-img mx-1" src="/images/icons/les.png" title="Леса">
-    <img id="swamps" type="element" class="filter icon-img mx-1" src="/images/icons/boloto.png" title="Болота">
-    <img id="dark" type="element" class="filter icon-img mx-1" src="/images/icons/tma.png" title="Тьма">
-    <img id="neutral" type="element" class="filter icon-img mx-1" src="/images/icons/neitral.png" title="Нейтральные">
-    <img id="common" type="rare" class="filter icon-img mx-1" src="/images/icons/common.png" title="Частые">
-    <img id="uncommon" type="rare" class="filter icon-img mx-1" src="/images/icons/uncommon.png" title="Необычные">
-    <img id="rare" type="rare" class="filter icon-img mx-1" src="/images/icons/rare.png" title="Редкие">
-    <img id="ultrarare" type="rare" class="filter icon-img mx-1" src="/images/icons/ultrarare.png" title="Ультраредкие">
-    <img id="ordinary" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-ordinary.png" title="Рядовые">
-    <img id="elite" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-elite.png" title="Элитные">
-    <img id="0legendsSet" type="set" class="filter icon-img mx-1" src="/images/icons/leg-laara.png" title="Легенды Лаара">
-    <img id="1warSet" type="set" class="filter icon-img mx-1" src="/images/icons/voina-stihiy.png" title="Война стихий">
-    <img id="2darkSet" type="set" class="filter icon-img mx-1" src="/images/icons/nash-tmy.png" title="Нашествие тьмы">
-    <img id="3seedSet" type="set" class="filter icon-img mx-1" src="/images/icons/sem-razdora.png" title="Семена раздора">
-    <img id="not" type="availability" class="icon-img mx-1 gray" src="/images/icons/minus.png" title="Нет в коллекции">
-    <img id="less" type="availability" class="icon-img mx-1 gray" src="/images/icons/less.png" title="Некомплект">
-    <img id="more" type="availability" class="icon-img mx-1 gray" src="/images/icons/more.png" title="Лишние">
-    <img id="have" type="availability" class="icon-img mx-1 gray" src="/images/icons/plus.png" title="В коллекции">
-    <img id="all" type="availability" class="icon-img mx-1" src="/images/icons/tilde.png" title="Все карты">
-    <img id="small" type="screen" class="icon-img mx-1" src="/images/icons/smallscreen.png" title="По 6 в ряд">
-    <img id="full" type="screen" class="icon-img mx-1 gray" src="/images/icons/fullscreen.png" title="На весь экран">
+<div class="mt-2 mb-2 row">
+    <div class="col-md-3 filter-col-start">
+        <input id="filterCardName" type="text" class="form-control" placeholder="Название карты">
+    </div>
+    <div class="col-md-6 filter-col d-flex justify-content-center">
+        <img id="plains" type="element" class="filter icon-img mx-1" src="/images/icons/stepi.png" title="Степи">
+        <img id="mountains" type="element" class="filter icon-img mx-1" src="/images/icons/gory.png" title="Горы">
+        <img id="forests" type="element" class="filter icon-img mx-1" src="/images/icons/les.png" title="Леса">
+        <img id="swamps" type="element" class="filter icon-img mx-1" src="/images/icons/boloto.png" title="Болота">
+        <img id="dark" type="element" class="filter icon-img mx-1" src="/images/icons/tma.png" title="Тьма">
+        <img id="neutral" type="element" class="filter icon-img mx-1" src="/images/icons/neitral.png" title="Нейтральные">
+        <img id="common" type="rare" class="filter icon-img mx-1" src="/images/icons/common.png" title="Частые">
+        <img id="uncommon" type="rare" class="filter icon-img mx-1" src="/images/icons/uncommon.png" title="Необычные">
+        <img id="rare" type="rare" class="filter icon-img mx-1" src="/images/icons/rare.png" title="Редкие">
+        <img id="ultrarare" type="rare" class="filter icon-img mx-1" src="/images/icons/ultrarare.png" title="Ультраредкие">
+        <img id="ordinary" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-ordinary.png" title="Рядовые">
+        <img id="elite" type="currency" class="filter icon-img mx-1" src="/images/icons/icon-elite.png" title="Элитные">
+        <img id="0legendsSet" type="set" class="filter icon-img mx-1" src="/images/icons/leg-laara.png" title="Легенды Лаара">
+        <img id="1warSet" type="set" class="filter icon-img mx-1" src="/images/icons/voina-stihiy.png" title="Война стихий">
+        <img id="2darkSet" type="set" class="filter icon-img mx-1" src="/images/icons/nash-tmy.png" title="Нашествие тьмы">
+        <img id="3seedSet" type="set" class="filter icon-img mx-1" src="/images/icons/sem-razdora.png" title="Семена раздора">
+        <img id="not" type="availability" class="icon-img mx-1 gray" src="/images/icons/minus.png" title="Нет в коллекции">
+        <img id="less" type="availability" class="icon-img mx-1 gray" src="/images/icons/less.png" title="Некомплект">
+        <img id="more" type="availability" class="icon-img mx-1 gray" src="/images/icons/more.png" title="Лишние">
+        <img id="have" type="availability" class="icon-img mx-1 gray" src="/images/icons/plus.png" title="В коллекции">
+        <img id="all" type="availability" class="icon-img mx-1" src="/images/icons/tilde.png" title="Все карты">
+    </div>
+    <div class="col-md-3 filter-col-end d-flex justify-content-end">
+        <img id="small" type="screen" class="icon-img mx-1" src="/images/icons/smallscreen.png" title="По 6 в ряд">
+        <img id="full" type="screen" class="icon-img mx-1 gray" src="/images/icons/fullscreen.png" title="На весь экран">
+    </div>
 </div>
 <main id="cardList" class="text-white container-xxl align-items-center text-center">
     <div class="row">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col @(Model[i].Currency) 
-                            @(Model[i].Rare) 
-                            @(Model[i].Element) 
+            <div class="col @(Model[i].Currency)
+                            @(Model[i].Rare)
+                            @(Model[i].Element)
                             @(Model[i].Set)
                             @(Model[i].Properties)
                             @(CollectionViewModel.GetAvailability(Model[i].Count, Model[i].IsHorde))" style="height:300px">
@@ -45,7 +52,7 @@
                     <img class="card-img gray" src="@Model[i].Image">
                 }
                 <br />
-                <b><label>@Model[i].Number. @Model[i].Name</label></b><br />
+                <b><label class="lblCardName">@Model[i].Number. @Model[i].Name</label></b><br />
                 <input type="hidden" name="cards[@i].Name" value="@Model[i].Name">
                 <label class="minus">-</label>
                 <label class="count">@Model[i].Count</label>
