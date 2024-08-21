@@ -7,6 +7,10 @@ main {
     background-color: rgb(0,14,26) !important;
 }
 
+.row {
+    width: 100%;
+}
+
 .form-label {
     font-size: 0.8rem;
 }
@@ -135,6 +139,32 @@ img {
     font-size:revert-layer;
 }
 
-    #filterCardName::placeholder {
-        color: lightgray;
-    }
+#deckName {
+    border-radius: 50px;
+    background: unset;
+    width: 300px;
+    height: 30px;
+    color: lightgray !important;
+    font-size: revert-layer;
+}
+
+.deckCard {
+    border-radius: 50px;
+    width: 260px;
+    color: lightgray;
+    font-size: revert-layer;
+    border-style: solid;
+    border-width: thin;
+}
+
+.deckCardCount {
+    width: 50px;
+    align-content: center;
+    font-size: medium;
+    padding-right: 0px;
+}
+
+#filterCardName::placeholder, 
+#deckName::placeholder {
+    color: lightgray;
+}

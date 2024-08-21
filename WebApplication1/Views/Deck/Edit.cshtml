@@ -1,7 +1,7 @@
 ﻿@using BerserkCollection.Models
 @model List<CollectionViewModel>
 
-<div class="mt-2 mb-2 row">
+<div class="mt-2 mb-2 row" style="width:100%">
     <div class="col-md-3 filter-col-start">
         <input id="filterCardName" type="text" class="form-control" placeholder="Название карты">
     </div>
@@ -22,7 +22,6 @@
         <img id="1warSet" type="set" class="filter icon-img mx-1" src="/images/icons/voina-stihiy.png" title="Война стихий">
         <img id="2darkSet" type="set" class="filter icon-img mx-1" src="/images/icons/nash-tmy.png" title="Нашествие тьмы">
         <img id="3seedSet" type="set" class="filter icon-img mx-1" src="/images/icons/sem-razdora.png" title="Семена раздора">
-        <img id="4falsegodsSet" type="set" class="filter icon-img mx-1" src="/images/icons/false-gods.png" title="Ложные боги">
         <img id="not" type="availability" class="icon-img mx-1 gray" src="/images/icons/minus.png" title="Нет в коллекции">
         <img id="less" type="availability" class="icon-img mx-1 gray" src="/images/icons/less.png" title="Некомплект">
         <img id="more" type="availability" class="icon-img mx-1 gray" src="/images/icons/more.png" title="Лишние">
@@ -34,33 +33,52 @@
         <img id="full" type="screen" class="icon-img mx-1 gray" src="/images/icons/fullscreen.png" title="На весь экран">
     </div>
 </div>
-<main id="cardList" class="text-white container-xxl align-items-center text-center">
+<main id="cardList" class="text-white container-fluid align-items-center text-center">
     <div class="row">
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <div class="col @(Model[i].Currency)
+        <div class="col">
+            <div class="row">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="col @(Model[i].Currency)
                             @(Model[i].Rare)
                             @(Model[i].Element)
                             @(Model[i].Set)
                             @(Model[i].Properties)
                             @(CollectionViewModel.GetAvailability(Model[i].Count, Model[i].IsHorde))" style="height:300px">
-                @if (Model[i].Count > 0)
-                {
-                    <img class="card-img" src="@Model[i].Image">
+                        @if (Model[i].Count > 0)
+                        {
+                            <img class="card-img" src="@Model[i].Image">
+                        }
+                        else
+                        {
+                            <img class="card-img gray" src="@Model[i].Image">
+                        }
+                        <br />
+                        <b><label class="lblCardName">@Model[i].Number. @Model[i].Name</label></b><br />
+                        <input type="hidden" name="cards[@i].Name" value="@Model[i].Name">
+                        <label class="count">@Model[i].Count</label>
+                        <img src="/images/icons/card (1).png" style="width:20px;margin-bottom:5px">
+                        <input class="idcard" type="hidden" name="cards[@i].Id" value="@Model[i].Id">
+                    </div>
                 }
-                else
-                {
-                    <img class="card-img gray" src="@Model[i].Image">
-                }
-                <br />
-                <b><label class="lblCardName">@Model[i].Number. @Model[i].Name</label></b><br />
-                <input type="hidden" name="cards[@i].Name" value="@Model[i].Name">
-                <label class="minus">-</label>
-                <label class="count">@Model[i].Count</label>
-                <input class="idcard" type="hidden" name="cards[@i].Id" value="@Model[i].Id">
-                <label class="plus">+</label>
             </div>
-        }
+        </div>
+        <div class="col-2" style="width:320px;text-align:left">
+            <div class="row mt-1">
+                <input id="deckName" type="text" class="form-control" placeholder="Название колоды">
+            </div>
+            <div class="row" style="height:20px">
+                <hr style="margin-top:10px;margin-bottom:10px;width:300px" />
+            </div>
+            <div class="row">
+                <span class="deckCard">10 <img id="elite" src="/images/icons/icon-elite.png" style="width:20px"> Прорицательница вершин</span>
+                <span class="deckCardCount">x 2</span>
+            </div>
+            <div class="row mt-1">
+                <span class="deckCard">4 <img id="elite" src="/images/icons/icon-ordinary.png" style="width:20px"> Поури</span>
+                <span class="deckCardCount">x 2</span>
+            </div>
+        </div>
     </div>
 
     <!-- Модальное окно -->
